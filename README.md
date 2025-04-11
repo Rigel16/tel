@@ -54,8 +54,8 @@ Cette commande :
 ## Connexion à phpMyAdmin
 
 - **Serveur** : `db`
-- **Utilisateur** : `root`
-- **Mot de passe** : `votre_mot_de_passe` *(défini dans `docker-compose.yml`)*
+- **Utilisateur** : *(défini dans `docker-compose.yml`)*
+- **Mot de passe** :  *(défini dans `docker-compose.yml`)*
 
 ---
 
@@ -73,11 +73,5 @@ Cette commande :
 - Le module Apache `mod_rewrite` est activé.
 - Les `.htaccess` sont pris en charge grâce à `AllowOverride All`.
 - Le code PHP est monté dans le conteneur via un volume.
-
----
-
-## Contact
-
-Pour toute question, n’hésitez pas à créer une issue sur ce dépôt ou à me contacter directement.
 
 ---
