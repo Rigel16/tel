@@ -25,3 +25,15 @@ function deletePhone(PDO $pdo, $id) {
     $stmt = $pdo->prepare("DELETE FROM phones WHERE id=?");
     return $stmt->execute([$id]);
 }
+
+function getAllColors(PDO $pdo) {
+    $stmt = $pdo->query("SELECT DISTINCT color FROM phones ORDER BY color");
+    $colors = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    // Si aucune couleur n'existe encore dans la BD, retourner des couleurs par défaut
+    if (empty($colors)) {
+        return ['Rouge', 'Vert', 'Bleu', 'Noir', 'Blanc'];
+    }
+    
+    return $colors;
+}

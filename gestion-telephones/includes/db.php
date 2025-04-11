@@ -2,10 +2,10 @@
 $host = 'localhost';
 $db   = 'telephones';
 $user = 'root';
-$pass = '';
-$charset = '';
-$port = ;
-$socket = ;
+$pass = 'root';
+$charset = 'utf8mb4';
+$port = 8889;
+$socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
 
 $dsn = "mysql:host=$host;dbname=$db;port=$port;unix_socket=$socket;charset=$charset";
 

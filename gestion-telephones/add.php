@@ -3,6 +3,7 @@ require 'includes/db.php';
 require 'includes/functions.php';
 
 $errors = [];
+$colors = getAllColors($pdo); // Récupérer les couleurs disponibles
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
@@ -28,21 +29,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h2>Ajouter un téléphone</h2>
-<?php foreach ($errors as $e): ?>
-    <p style="color:red"><?= $e ?></p>
-<?php endforeach; ?>
-<form method="post">
-    Marque: <input name="brand" required><br>
-    IMEI: <input name="imei" required><br>
-    Nom: <input name="name" required><br>
-    Couleur:
-    <select name="color">
-        <option>Rouge</option>
-        <option>Vert</option>
-        <option>Bleu</option>
-    </select><br>
-    Capacité (GO): <input type="number" name="capacity" required><br>
-    <button type="submit">Enregistrer</button>
-</form>
-<a href="index.php">Retour</a>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un téléphone</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Ajouter un téléphone</h2>
+        <?php foreach ($errors as $e): ?>
+            <p class="error"><?= $e ?></p>
+        <?php endforeach; ?>
+        <form method="post" class="phone-form">
+            <div class="form-group">
+                <label for="brand">Marque:</label>
+                <input id="brand" name="brand" required>
+            </div>
+            <div class="form-group">
+                <label for="imei">IMEI:</label>
+                <input id="imei" name="imei" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Nom:</label>
+                <input id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="color">Couleur:</label>
+                <select id="color" name="color">
+                    <?php foreach ($colors as $color): ?>
+                        <option><?= htmlspecialchars($color) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="capacity">Capacité (GO):</label>
+                <input type="number" id="capacity" name="capacity" required>
+            </div>
+            <button type="submit" class="btn">Enregistrer</button>
+        </form>
+        <a href="index.php" class="back-link">Retour</a>
+    </div>
+</body>
+</html>
