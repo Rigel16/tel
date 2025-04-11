@@ -1,129 +1,84 @@
-# Application de Gestion des Téléphones
+# 📱 Gestion des Téléphones - Projet PHP + Docker
 
-Une application PHP simple permettant de gérer un inventaire de téléphones et leurs caractéristiques.
-
-## Fonctionnalités
-
-- Affichage de la liste des téléphones
-- Ajout de nouveaux téléphones
-- Modification des téléphones existants
-- Suppression des téléphones
-- Gestion des couleurs disponibles
-
-## Prérequis
-
-- PHP 7.4 ou plus récent
-- Serveur MySQL (MAMP recommandé)
-- Extension PDO PHP
-
-## Installation
-
-1. Clonez le dépôt ou téléchargez les fichiers vers votre serveur web.
-2. Importez la base de données en utilisant le script SQL fourni.
-3. Configurez la connexion à la base de données dans `includes/db.php` si nécessaire.
-
-## Configuration de la base de données
-
-La base de données est configurée par défaut pour fonctionner avec MAMP :
-
-- **Hôte**: `localhost`
-- **Base de données**: `telephones`
-- **Utilisateur**: `root`
-- **Mot de passe**: ``
-- **Port**: ``
-- **Socket**:''
-
-## Structure de la base de données
-
-La base de données `telephones` comporte deux tables :
-
-### Table `phones`
-
-| Nom de la colonne | Type       | Description                              |
-|-------------------|------------|------------------------------------------|
-| `id`              | INT        | Clé primaire                             |
-| `brand`           | VARCHAR    | Marque du téléphone                      |
-| `imei`            | VARCHAR    | Numéro IMEI unique                       |
-| `name`            | VARCHAR    | Nom du modèle                            |
-| `color_id`        | INT        | Clé étrangère vers la table `colors`     |
-| `capacity`        | INT        | Capacité de stockage en GO               |
-
-### Table `colors`
-
-| Nom de la colonne | Type       | Description                              |
-|-------------------|------------|------------------------------------------|
-| `id`              | INT        | Clé primaire                             |
-| `name`            | VARCHAR    | Nom de la couleur                        |
-
-## Structure des fichiers
-
-- **`index.php`** : Page d'accueil listant tous les téléphones
-- **`add.php`** : Formulaire d'ajout d'un téléphone
-- **`edit.php`** : Formulaire de modification d'un téléphone
-- **`delete.php`** : Script de suppression d'un téléphone
-- **`colors.php`** : Gestion des couleurs disponibles
-
-### Dossier `includes/`
-
-- **`db.php`** : Configuration de la connexion à la base de données
-- **`functions.php`** : Fonctions utilitaires pour interagir avec la base de données
-
-### Dossier `public/css/`
-
-- **`style.css`** : Feuille de style pour l'application
-
-## Utilisation
-
-1. Accédez à `index.php` pour voir la liste des téléphones.
-2. Utilisez le bouton "Ajouter un téléphone" pour créer un nouveau téléphone.
-3. Utilisez les boutons d'action pour modifier ou supprimer des téléphones existants.
-4. Utilisez "Gérer les couleurs" pour ajouter ou supprimer des couleurs disponibles.
-
-## Règles de validation
-
-- Le **nom** du téléphone est requis.
-- La **capacité** doit être un nombre positif et un multiple de 2.
-- Une **couleur** ne peut pas être supprimée si elle est utilisée par un téléphone.
-
-## Remarques
-
-- L'application est en **français**.
-- La sécurité de base est implémentée avec des **requêtes préparées**.
-- Les données sont **échappées** correctement lors de l'affichage.
-
-
-```php
-// Exemple dans config/database.php
-$host = 'localhost';
-$dbname = 'gestion_telephones';
-$username = 'votre_utilisateur';
-$password = 'votre_mot_de_passe';
-$port = 3306; // Port par défaut MySQL
-
-// Utilisation de socket si défini
-$socket = null; // Changez cette valeur si vous utilisez un socket Unix
-if ($socket) {
-    $dsn = "mysql:unix_socket=$socket;dbname=$dbname";
-} else {
-    $dsn = "mysql:host=$host;port=$port;dbname=$dbname";
-}
-```
-
-3. **Création de la base de données**
-
-Importez le schéma de la base de données :
-
-```bash
-mysql -u votre_utilisateur -p < sql/telephones.sql
-```
-
-4. **Lancer l'application**
-
-Accédez à l'application via votre navigateur en fonction de votre configuration de serveur local.
+Ce projet est une application de gestion de téléphones construite en PHP avec une base de données MySQL, le tout conteneurisé avec Docker.
 
 ---
 
-## 📝 Notes
+## Lancer l'application
 
-- Assurez-vous que les permissions sont correctement configurées pour les fichiers de l'application
-- Pour les environnements de production, considérez la mise en place de mesures de sécurité supplémentaires
+### 1. Cloner le dépôt
+
+```bash
+git clone https://github.com/votre-utilisateur/votre-repo.git
+cd votre-repo
+```
+
+> Remplacez l’URL par celle de votre dépôt GitHub.
+
+---
+
+### 2. Prérequis
+
+Assurez-vous d’avoir installé **Docker** et **Docker Compose** sur votre machine :
+
+- **Mac** : [Installer Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- **Windows** : [Installer Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- **Linux** : [Installer Docker Engine](https://docs.docker.com/engine/install/) et [Docker Compose](https://docs.docker.com/compose/install/)
+
+⚠️ Les **ports `8080` et `8081`** doivent être libres.
+
+---
+
+### 3. Lancer l'application avec Docker
+
+Dans le dossier du projet, exécutez la commande suivante :
+
+```bash
+docker-compose up --build
+```
+
+Cette commande :
+
+- construit les images Docker
+- initialise la base de données avec `telephones.sql`
+- démarre les services `web` et `db`
+
+---
+
+## Accéder à l'application
+
+- 👉 Application Web : [http://localhost:8080](http://localhost:8080)
+- 👉 phpMyAdmin : [http://localhost:8081](http://localhost:8081)
+
+---
+
+## Connexion à phpMyAdmin
+
+- **Serveur** : `db`
+- **Utilisateur** : `root`
+- **Mot de passe** : `votre_mot_de_passe` *(défini dans `docker-compose.yml`)*
+
+---
+
+## Structure du projet
+
+- `docker-compose.yml` – Définit les services Docker
+- `Dockerfile` – Configuration du conteneur PHP + Apache
+- `telephones.sql` – Script SQL de création de la base
+- `gestion-telephones/` – Code source de l’application
+
+---
+
+## Notes
+
+- Le module Apache `mod_rewrite` est activé.
+- Les `.htaccess` sont pris en charge grâce à `AllowOverride All`.
+- Le code PHP est monté dans le conteneur via un volume.
+
+---
+
+## Contact
+
+Pour toute question, n’hésitez pas à créer une issue sur ce dépôt ou à me contacter directement.
+
+---
