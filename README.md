@@ -13,7 +13,6 @@ git clone git@github.com:Rigel16/tel.git
 cd votre-repo
 ```
 
-> Remplacez l’URL par celle de votre dépôt GitHub.
 
 ---
 
