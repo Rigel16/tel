@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  # Service pour l'application PHP
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./gestion-telephones:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    networks:
+      - telephones-network
+
+  # Service pour la base de données MySQL
+  db:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./telephones.sql:/docker-entrypoint-initdb.d/telephones.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: telephones
+      MYSQL_USER: phoneuser
+      MYSQL_PASSWORD: phonepassword
+    networks:
+      - telephones-network
+
+  # Service pour phpMyAdmin (optionnel mais utile)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    depends_on:
+      - db
+    networks:
+      - telephones-network
+
+volumes:
+  db_data:
+
+networks:
+  telephones-network:

@@ -1,13 +1,10 @@
 <?php
-$host = 'localhost';
+$host = 'db';
 $db   = 'telephones';
-$user = 'root';
-$pass = '';
-$charset = '';
-$port = ;
-$socket = '';
-
-$dsn = "mysql:host=$host;dbname=$db;port=$port;unix_socket=$socket;charset=$charset";
+$user = 'phoneuser'; 
+$pass = 'phonepassword'; 
+$charset = 'utf8mb4';
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
