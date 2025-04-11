@@ -9,7 +9,7 @@ Ce projet est une application de gestion de téléphones construite en PHP avec 
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/votre-utilisateur/votre-repo.git
+git clone git@github.com:Rigel16/tel.git
 cd votre-repo
 ```
 
