@@ -29,8 +29,9 @@ La base de données est configurée par défaut pour fonctionner avec MAMP :
 - **Hôte**: `localhost`
 - **Base de données**: `telephones`
 - **Utilisateur**: `root`
-- **Mot de passe**: `root`
-- **Port**: `8889`
+- **Mot de passe**: ``
+- **Port**: ``
+- **Socket**:''
 
 ## Structure de la base de données
 
