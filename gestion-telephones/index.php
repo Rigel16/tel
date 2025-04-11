@@ -15,7 +15,10 @@ $phones = getAllPhones($pdo);
 <body>
     <div class="container">
         <h1>📱 Gestion des Téléphones</h1>
-        <a href="add.php" class="btn">➕ Ajouter un téléphone</a>
+        <div class="actions">
+            <a href="add.php" class="btn">➕ Ajouter un téléphone</a>
+            <a href="colors.php" class="btn">🎨 Gérer les couleurs</a>
+        </div>
         <table>
             <tr>
                 <th>ID</th>
@@ -32,7 +35,7 @@ $phones = getAllPhones($pdo);
                     <td><?= htmlspecialchars($phone['brand']) ?></td>
                     <td><?= htmlspecialchars($phone['imei']) ?></td>
                     <td><?= htmlspecialchars($phone['name']) ?></td>
-                    <td><?= htmlspecialchars($phone['color']) ?></td>
+                    <td><?= htmlspecialchars($phone['color_name']) ?></td>
                     <td><?= htmlspecialchars($phone['capacity']) ?> GO</td>
                     <td>
                         <a href="edit.php?id=<?= $phone['id'] ?>" class="btn">✏️</a>

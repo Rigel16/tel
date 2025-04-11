@@ -3,14 +3,14 @@ require 'includes/db.php';
 require 'includes/functions.php';
 
 $errors = [];
-$colors = getAllColors($pdo); // Récupérer les couleurs disponibles
+$colors = getAllColors($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
         'brand' => $_POST['brand'],
         'imei' => $_POST['imei'],
         'name' => trim($_POST['name']),
-        'color' => $_POST['color'],
+        'color_id' => $_POST['color_id'],
         'capacity' => (int)$_POST['capacity']
     ];
 
@@ -56,10 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="color">Couleur:</label>
-                <select id="color" name="color">
+                <label for="color_id">Couleur:</label>
+                <select id="color_id" name="color_id">
                     <?php foreach ($colors as $color): ?>
-                        <option><?= htmlspecialchars($color) ?></option>
+                        <option value="<?= $color['id'] ?>"><?= htmlspecialchars($color['name']) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
